@@ -24,9 +24,10 @@ export function useSocialSocket() {
   useEffect(() => {
     if (!token) return
 
-    const socket = io(
-      `${window.location.protocol}//${window.location.hostname}:5000/social`,
-      {
+    const BACKEND = import.meta.env.VITE_API_URL
+      || `${window.location.protocol}//${window.location.hostname}:5000`
+
+    const socket = io(`${BACKEND}/social`, {
         auth: { token },
         transports: ['websocket', 'polling'],
         reconnectionAttempts: 5,

@@ -6,8 +6,9 @@ node_modules/
 .env.local
 .env.*.local
 
-# ── Archivos subidos por usuarios ─────────────────────────
-backend/uploads/
+# ── Archivos subidos por usuarios (no subir al repo) ─────
+backend/uploads/*
+!backend/uploads/.gitkeep
 
 # ── Build outputs ─────────────────────────────────────────
 frontend/dist/

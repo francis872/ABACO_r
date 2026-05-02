@@ -1,8 +1,14 @@
 import axios from 'axios'
 import { useAuthStore } from '@/store/authStore'
 
+// En producción (Vercel) VITE_API_URL = URL del backend en Railway
+// En desarrollo el proxy de Vite reenvía /api → localhost:5000
+const BASE = import.meta.env.VITE_API_URL
+  ? `${import.meta.env.VITE_API_URL}/api`
+  : '/api'
+
 const api = axios.create({
-  baseURL: '/api',
+  baseURL: BASE,
   timeout: 30000,
   headers: {
     'Content-Type': 'application/json',

@@ -11,7 +11,9 @@ let socket: Socket | null = null;
 export function getSocket(): Socket {
   if (!socket) {
     const token = useAuthStore.getState().token;
-    socket = io(`${window.location.protocol}//${window.location.hostname}:5000/mapa`, {
+    const BACKEND = import.meta.env.VITE_API_URL
+      || `${window.location.protocol}//${window.location.hostname}:5000`
+    socket = io(`${BACKEND}/mapa`, {
       auth: { token },
       transports: ['websocket', 'polling'],
       reconnectionAttempts: 5,
