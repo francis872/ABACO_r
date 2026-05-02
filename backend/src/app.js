@@ -78,7 +78,10 @@ app.use('/api/publicaciones',  publicacionesRoutes);
 
 // Servir archivos subidos por usuarios
 const path = require('path');
-app.use('/uploads', express.static(path.join(__dirname, '../../uploads')));
+const uploadsDir = process.env.NODE_ENV === 'production'
+  ? '/tmp/uploads'
+  : path.join(__dirname, '../../uploads');
+app.use('/uploads', express.static(uploadsDir));
 
 // Ruta de salud del servidor
 app.get('/api/salud', (req, res) => {

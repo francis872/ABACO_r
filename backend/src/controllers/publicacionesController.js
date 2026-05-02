@@ -21,11 +21,15 @@ const TIPOS_PERMITIDOS = {
 const MAX_BYTES  = 10 * 1024 * 1024; // 10 MB por archivo
 const MAX_FILES  = 4;
 
+// En producción (Render plan gratuito) el FS es efímero; se usa /tmp
+const UPLOADS_DIR = process.env.NODE_ENV === 'production'
+  ? path.join('/tmp', 'uploads', 'publicaciones')
+  : path.join(__dirname, '../../uploads/publicaciones');
+
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
-    const dir = path.join(__dirname, '../../uploads/publicaciones');
-    fs.mkdirSync(dir, { recursive: true });
-    cb(null, dir);
+    fs.mkdirSync(UPLOADS_DIR, { recursive: true });
+    cb(null, UPLOADS_DIR);
   },
   filename: (req, file, cb) => {
     const ext = TIPOS_PERMITIDOS[file.mimetype]?.ext || '.bin';
