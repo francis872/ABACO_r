@@ -1,0 +1,171 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ─────────────────────────────────────────
+   ÁBACO — Sistema de diseño oscuro
+   Inspiración: SpaceX / diseño espacial
+   ───────────────────────────────────────── */
+
+@layer base {
+  * {
+    @apply box-border;
+  }
+
+  html {
+    @apply scroll-smooth;
+  }
+
+  body {
+    @apply bg-black text-white font-sans antialiased;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-bold text-white tracking-tight;
+  }
+
+  /* Scrollbar oscura */
+  ::-webkit-scrollbar {
+    width: 4px;
+    height: 4px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: #000;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: #333;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: #555;
+  }
+}
+
+@layer components {
+  /* ── Botones ── */
+  .btn-primario {
+    @apply inline-flex items-center gap-2 px-5 py-2.5
+           border border-white text-white text-xs font-medium tracking-[0.12em] uppercase
+           hover:bg-white hover:text-black
+           transition-colors duration-150 disabled:opacity-40 disabled:cursor-not-allowed;
+  }
+
+  .btn-secundario {
+    @apply inline-flex items-center gap-2 px-5 py-2.5
+           border border-white/20 text-white/60 text-xs font-medium tracking-[0.12em] uppercase
+           hover:border-white/50 hover:text-white/90
+           transition-colors duration-150;
+  }
+
+  .btn-peligro {
+    @apply inline-flex items-center gap-2 px-5 py-2.5
+           border border-red-500/60 text-red-400 text-xs font-medium tracking-[0.12em] uppercase
+           hover:border-red-400 hover:text-red-300
+           transition-colors duration-150;
+  }
+
+  /* ── Tarjetas ── */
+  .tarjeta {
+    @apply bg-abaco-900 border border-white/[0.07];
+  }
+
+  .tarjeta-header {
+    @apply px-6 py-4 border-b border-white/[0.07];
+  }
+
+  .tarjeta-body {
+    @apply p-6;
+  }
+
+  /* ── Inputs ── */
+  .campo-entrada {
+    @apply w-full px-0 py-2.5 text-sm bg-transparent
+           border-0 border-b border-white/20 text-white
+           focus:outline-none focus:border-white/60
+           placeholder:text-white/25
+           transition-colors duration-150;
+  }
+
+  /* ── Labels / etiquetas ── */
+  .etiqueta {
+    @apply block text-[10px] font-medium text-white/40 uppercase tracking-[0.18em] mb-2;
+  }
+
+  /* ── Badges ── */
+  .badge {
+    @apply inline-flex items-center px-2.5 py-0.5 text-[10px] font-medium tracking-wider uppercase border;
+  }
+
+  .badge-azul    { @apply badge border-blue-500/40 text-blue-400 bg-blue-500/10; }
+  .badge-verde   { @apply badge border-emerald-500/40 text-emerald-400 bg-emerald-500/10; }
+  .badge-rojo    { @apply badge border-red-500/40 text-red-400 bg-red-500/10; }
+  .badge-naranja { @apply badge border-orange-500/40 text-orange-400 bg-orange-500/10; }
+  .badge-gris    { @apply badge border-white/20 text-white/50 bg-white/5; }
+  .badge-oro     { @apply badge border-oro-400/40 text-oro-400 bg-oro-400/10; }
+
+  /* ── Separador ── */
+  .divisor {
+    @apply border-t border-white/[0.07];
+  }
+
+  /* ── Stat / KPI ── */
+  .kpi-numero {
+    @apply text-4xl font-bold text-white tracking-tight;
+  }
+
+  .kpi-label {
+    @apply text-[10px] uppercase tracking-[0.18em] text-white/40 font-medium;
+  }
+}
+
+/* ── Leaflet overrides ── */
+.leaflet-container {
+  font-family: 'Space Grotesk', 'Inter', system-ui, sans-serif !important;
+  background: #000 !important;
+}
+
+.leaflet-control-attribution {
+  background: rgba(0,0,0,0.7) !important;
+  color: rgba(255,255,255,0.3) !important;
+}
+
+/* ── Recharts overrides ── */
+.recharts-cartesian-grid line {
+  stroke: rgba(255,255,255,0.06) !important;
+}
+
+.recharts-text {
+  fill: rgba(255,255,255,0.4) !important;
+}
+
+.recharts-tooltip-wrapper .recharts-default-tooltip {
+  background: #111 !important;
+  border: 1px solid rgba(255,255,255,0.12) !important;
+  border-radius: 0 !important;
+}
+
+/* ── Animaciones ── */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slideIn {
+  from { opacity: 0; transform: translateX(-8px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.3s ease-out;
+}
+
+.animate-slide-in {
+  animation: slideIn 0.3s ease-out;
+}
+
+/* ── Línea decorativa ── */
+.linea-acento {
+  @apply w-8 h-px bg-oro-400;
+}
