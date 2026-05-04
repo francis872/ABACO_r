@@ -95,37 +95,6 @@ app.get('/api/salud', (req, res) => {
 });
 
 // =====================================================
-// MIGRACIÓN TEMPORAL (eliminar después de ejecutar)
-// =====================================================
-app.get('/api/_migrate', async (req, res) => {
-  if (req.query.key !== 'abaco_migrate_2024') {
-    return res.status(403).json({ exito: false, mensaje: 'Forbidden' });
-  }
-  try {
-    const { Pool } = require('pg');
-    const fs = require('fs');
-    const nodePath = require('path');
-    const pool = new Pool({
-      connectionString: process.env.DATABASE_URL,
-      ssl: { rejectUnauthorized: false },
-    });
-    const files = ['schema.sql', 'social_migration.sql', 'seed.sql'];
-    const results = [];
-    for (const f of files) {
-      const fp = nodePath.join(__dirname, 'config', f);
-      if (!fs.existsSync(fp)) { results.push(`SKIP: ${f}`); continue; }
-      const sql = fs.readFileSync(fp, 'utf8');
-      await pool.query(sql);
-      results.push(`OK: ${f}`);
-    }
-    await pool.end();
-    return res.json({ exito: true, results });
-  } catch (err) {
-    return res.status(500).json({ exito: false, error: err.message });
-  }
-});
-
-// =====================================================
 // MANEJO DE ERRORES
 // =====================================================
 
