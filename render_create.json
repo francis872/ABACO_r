@@ -1,0 +1,30 @@
+{
+  "autoDeploy": "yes",
+  "branch": "main",
+  "name": "abaco-backend",
+  "ownerId": "tea-d7r2hkmgvqtc73b81t70",
+  "plan": "free",
+  "region": "oregon",
+  "repo": "https://github.com/francis872/ABACO_r",
+  "rootDir": "backend",
+  "type": "web_service",
+  "serviceDetails": {
+    "healthCheckPath": "/api/salud",
+    "pullRequestPreviewsEnabled": "no",
+    "runtime": "node",
+    "envSpecificDetails": {
+      "buildCommand": "npm install",
+      "startCommand": "node src/server.js"
+    }
+  },
+  "envVars": [
+    { "key": "NODE_ENV", "value": "production" },
+    { "key": "DATABASE_URL", "value": "postgresql://abaco_db_user:P4BOKz0Lyo46nHkGS52K482iY4RK8QFl@dpg-d7r2krpkh4rs73ejitug-a/abaco_db" },
+    { "key": "JWT_SECRET", "value": "abaco_jwt_super_secret_2024_production_key_xyz789" },
+    { "key": "JWT_REFRESH_SECRET", "value": "abaco_refresh_super_secret_2024_production_key_abc456" },
+    { "key": "JWT_EXPIRES_IN", "value": "8h" },
+    { "key": "JWT_REFRESH_EXPIRES_IN", "value": "7d" },
+    { "key": "MAX_FILE_SIZE", "value": "10485760" },
+    { "key": "FRONTEND_URL", "value": "https://frontend-seven-black-14.vercel.app" }
+  ]
+}

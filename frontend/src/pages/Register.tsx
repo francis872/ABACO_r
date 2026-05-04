@@ -42,7 +42,17 @@ export default function Register() {
         navigate('/')
       }
     } catch (err: any) {
-      toast.error(err.response?.data?.mensaje || 'Error al crear la cuenta')
+      if (!err.response) {
+        toast.error('No se pudo conectar al servidor. Verifica tu conexión.')
+        return
+      }
+      const { data } = err.response
+      // Mostrar primer error de validación si existe
+      if (data?.errores?.length) {
+        toast.error(data.errores[0].msg)
+      } else {
+        toast.error(data?.mensaje || 'Error al crear la cuenta')
+      }
     } finally {
       setCargando(false)
     }
